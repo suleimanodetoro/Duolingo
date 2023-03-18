@@ -8,7 +8,7 @@ const ImageOption = (props) => {
   const text= props.text
 
   return (
-    <View style={styles.optionContainer}>
+    <View style={[styles.optionContainer, props.isSelected ? styles.selectedContainer : {} ]}>
           <Image
             source={{
               uri: props.image,
@@ -16,7 +16,7 @@ const ImageOption = (props) => {
             resizeMode="contain"
             style={styles.optionImage}
           />
-          <Text style={styles.optionText}>{props.text.toUpperCase()}</Text>
+          <Text style={[styles.optionText, props.isSelected ? styles.selectedText: {}]}>{props.text.toUpperCase()}</Text>
         </View>
   )
 }

@@ -20,11 +20,21 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
       },
+      selectedContainer:{
+        borderColor:"#81D5FE",
+        backgroundColor: "#DDF4FE",
+      },
       optionImage: {
         width: "100%",
         flex: 1, //The image should all available space minus the text
       },
-      optionText: {},
+      optionText: {
+        fontWeight:"bold",
+      },
+      selectedText:{
+        color:"#40BEF7",
+        fontWeight:"bold",
+      },
 
 })
 

@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
       },
       optionText: {
         fontWeight:"bold",
+        color:"black"
       },
       selectedText:{
         color:"#40BEF7",

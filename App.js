@@ -3,13 +3,10 @@ import { useState, useEffect } from "react";
 import { Text, View, Image, Alert } from "react-native";
 
 import styles from "./App.styles";
-
-import ImageOption from "./src/components/ImageOption/ImageOption";
 import questions from "./assets/data/imageMultipleChoiceQuestions";
-import Button from "./src/components/Button";
+import ImageMultipleChoiceQuestion from "./src/components/ImageMultipleChoiceQuestion";
 
 const App = () => {
-  const [selected, setSelected] = useState(null);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(
     questions[questionIndex]
@@ -24,35 +21,22 @@ const App = () => {
       setCurrentQuestion(questions[questionIndex]);
     }
   }, [questionIndex]);
-
-  const onButtonPress = () => {
-    if (selected.correct) {
-      //This logic works, but wont change the question cause state setter is asynchronous and will update on the next render of the code
-      setQuestionIndex(questionIndex + 1);
-      setSelected(null); // to deselect items after pressing button
-    } else {
-    }
+  //Triggered when a correct answer has been chosen
+  const onCorrect = () => {
+    setQuestionIndex(questionIndex + 1);
   };
+  const onWrong = () => {
+    Alert.alert("Wrong");
+  };
+
   return (
     <View style={styles.root}>
       {/* Question text imported from data file */}
-      <Text style={styles.title}>{currentQuestion.question}</Text>
-
-      <View style={styles.optionsContainer}>
-        {/* Dynamically render image options from 'option' array. All maps should ideally have unique key identifier */}
-        {currentQuestion.options.map((option) => (
-          <ImageOption
-            key={option.id}
-            image={option.image}
-            text={option.text}
-            onPress={() => {
-              setSelected(option);
-            }}
-            isSelected={selected?.id === option.id} //logic here works after onPress logic is triggered
-          />
-        ))}
-      </View>
-      <Button text={"check"} onPress={onButtonPress} disabled={!selected} />
+      <ImageMultipleChoiceQuestion
+        question={currentQuestion}
+        onCorrect={onCorrect}
+        onWrong={onWrong}
+      />
     </View>
   );
 };

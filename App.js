@@ -3,8 +3,11 @@ import { useState, useEffect } from "react";
 import { Text, View, Image, Alert } from "react-native";
 
 import styles from "./App.styles";
-import questions from "./assets/data/imageMultipleChoiceQuestions";
-import ImageMultipleChoiceQuestion from "./src/components/ImageMultipleChoiceQuestion";
+// import questions from "./assets/data/imageMultipleChoiceQuestions";
+// import ImageMultipleChoiceQuestion from "./src/components/ImageMultipleChoiceQuestion";
+import OpenEndedQuestion from "./src/components/OpenEndedQuestion/";
+import questions from "./assets/data/openEndedQuestions";
+
 
 const App = () => {
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -32,11 +35,12 @@ const App = () => {
   return (
     <View style={styles.root}>
       {/* Question text imported from data file */}
-      <ImageMultipleChoiceQuestion
+      {/* <ImageMultipleChoiceQuestion
         question={currentQuestion}
         onCorrect={onCorrect}
         onWrong={onWrong}
-      />
+      /> */}
+      <OpenEndedQuestion question={currentQuestion} onCorrect={onCorrect} onWrong={onWrong} />
     </View>
   );
 };

@@ -6,6 +6,8 @@ import styles from "./App.styles";
 import ImageMultipleChoiceQuestion from "./src/components/ImageMultipleChoiceQuestion";
 import OpenEndedQuestion from "./src/components/OpenEndedQuestion/";
 import questions from "./assets/data/allQuestions";
+import Header from "./src/components/Header";
+
 
 
 const App = () => {
@@ -33,6 +35,7 @@ const App = () => {
 
   return (
     <View style={styles.root}>
+      <Header progress={questionIndex/questions.length}/>
       {/* Question text imported from data file */}
       {currentQuestion.type === 'IMAGE_MULTIPLE_CHOICE' && (<ImageMultipleChoiceQuestion
         question={currentQuestion}

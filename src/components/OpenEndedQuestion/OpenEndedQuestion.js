@@ -12,14 +12,14 @@ const OpenEndedQuestion = (props) => {
   const [userInput, setUserInput] = useState("")
 
   const onButtonPress = () =>{
-    if (question.answer.toLowerCase === userInput.toLowerCase) {
+    if (question.answer.toLowerCase().trim() === userInput.toLowerCase().trim()) {
       onCorrect();
-      setUserInput(null); // to deselect items after pressing button
 
     } else {
       onWrong();
-      
     }
+    setUserInput(null); // to deselect items after pressing button
+
   }
   // const questionItem = 
   return (
@@ -49,5 +49,7 @@ const OpenEndedQuestion = (props) => {
     </>
   );
 };
+
+//prop type 
 
 export default OpenEndedQuestion;

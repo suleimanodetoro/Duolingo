@@ -18,6 +18,7 @@ const ImageMultipleChoiceQuestion = (props) => {
       setSelected(null); // to deselect items after pressing button
     } else {
       onWrong();
+      setSelected(null);
     }
   };
   return (

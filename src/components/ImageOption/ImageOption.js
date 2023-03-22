@@ -41,12 +41,15 @@ ImageOption.propTypes = {
   image: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   onPress: PropTypes.func,
+  isSelected: PropTypes.bool,
+
 };
 
 // For the instance where text field is not populated in ImageOption
 ImageOption.defaultProps = {
   text: "Default",
-  onPress: () => {}
+  onPress: () => {},
+  isSelected: false,
 };
 
 export default ImageOption;

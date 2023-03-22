@@ -45,7 +45,8 @@ const OpenEndedQuestion = (props) => {
         value={userInput}
         onChangeText={setUserInput}
       />
-      <Button text={"check"} disabled={false} onPress={onButtonPress}/>
+      {/* Button is disabled if input is false(empty) */}
+      <Button text={"check"} disabled={!input} onPress={onButtonPress}/> 
     </>
   );
 };

@@ -8,6 +8,8 @@ import OpenEndedQuestion from "./src/components/OpenEndedQuestion/";
 import questions from "./assets/data/allQuestions";
 import Header from "./src/components/Header";
 import AsyncStorage from "@react-native-async-storage/async-storage"
+import FillInTheBlank from "./src/components/FillInTheBlank";
+
 
 const App = () => {
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -31,7 +33,11 @@ const App = () => {
   useEffect(() =>{loadData()},[])
 
   //Save data everytime live or question index changes in the app.
-  useEffect(()=>{saveData()},[lives, questionIndex,hasLoaded])
+  useEffect(() => {
+    if (hasLoaded) {
+      saveData();
+    }
+  }, [lives, questionIndex, hasLoaded]);
 
   const restart = () => {
     setQuestionIndex(0);
@@ -67,6 +73,7 @@ const App = () => {
 
   }
   const loadData = async () =>{
+    
     const loadedLives = await AsyncStorage.getItem('lifeInfo')
     //if loaded lives is not null
     if (loadedLives) {
@@ -76,10 +83,12 @@ const App = () => {
     const lastQuestion = await AsyncStorage.getItem('lastQuestion')
     //if retrieved data is not null, set the state variable
     if (lastQuestion) {
+      // setCurrentQuestion(0)
       setQuestionIndex(parseInt(lastQuestion));
       
     }
-    setHasLoaded(true);
+    setHasLoaded(true); 
+    
 
   }
   if (!hasLoaded) {
@@ -103,6 +112,13 @@ const App = () => {
           question={currentQuestion}
           onCorrect={onCorrect}
           onWrong={onWrong}
+        />
+      )}
+      {currentQuestion.type === "FILL_IN_THE_BLANK" && (
+        <FillInTheBlank
+        question={currentQuestion}
+        onCorrect={onCorrect}
+        onWrong={onWrong}
         />
       )}
     </View>

@@ -1,5 +1,31 @@
 export default [
   {
+    id: "q0",
+    type: "FILL_IN_THE_BLANK",
+    text:"una ina, una",
+    correct:"mujer",
+    options:["yo","la","mujer","el"],
+    parts: [
+      {
+        text: "la",
+        isBlank: true,
+      },
+      {
+        text: "nino",
+        isBlank: true,
+      },
+      {
+        text: "el",
+        isBlank: true,
+      },
+      {
+        text: "nina",
+        isBlank: true,
+      },
+    ],
+    optionsli: ["la", "el", "nina", "nino", "ella"],
+  },
+  {
     id: "q1",
     type: "IMAGE_MULTIPLE_CHOICE",
     question: 'Which of these is "the glass"?',
@@ -145,12 +171,5 @@ export default [
         text: "el café",
       },
     ],
-  },
-  {
-    id: "q7",
-    type: "FILL_IN_THE_BLANK",
-    text: "una nina, una",
-    options:["yo","la","mujer","el"],
-    correctOption:"mujer",
   },
 ];

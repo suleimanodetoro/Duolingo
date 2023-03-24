@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
         marginVertical:10,
         height:70,  // for some reason, if this figure was smaller say 70, it wouldn't display text. figure out later lol
       },
-      //no idea the use of the alignself style
       text:{
         alignSelf:"flex-end",
         fontSize:18

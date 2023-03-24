@@ -14,13 +14,16 @@ const FillInTheBlank = ({ question, onCorrect, onWrong }) => {
     } else {
       onWrong();
     }
+    setParts((existingParts) =>
+      [...existingParts].map((p) => ({ ...p, selected: null }))
+    );
   };
-const checkAnswer = () => {
-  return (
-    parts.filter((part) => part.isBlank && part.selected !== part.text)
-      .length === 0
-  );
-};
+  const checkAnswer = () => {
+    return (
+      parts.filter((part) => part.isBlank && part.selected !== part.text)
+        .length === 0
+    );
+  };
   //Adds option to blank by recreating parts state array, and inserting selected variable as text clicked so it is no longer undefined and the word option renders
   const addOptionToSelected = (option) => {
     //Do not add any options thay is already selected
@@ -57,8 +60,7 @@ const checkAnswer = () => {
     );
   };
   const answerReady = () => {
-    return parts.filter(
-      (part) => part.isBlank && !part.selected).length > 0
+    return parts.filter((part) => part.isBlank && !part.selected).length > 0;
   };
 
   return (

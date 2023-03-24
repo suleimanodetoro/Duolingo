@@ -19,13 +19,17 @@ const FillInTheBlank = ({ question, onCorrect, onWrong }) => {
   };
   //Adds option to blank by recreating parts state array, and inserting selected variable as text clicked so it is no longer undefined and the word option renders
   const addOptionToSelected = (option) => {
+    //Do not add any options thay is already selected
+    if (isSelected(option)) {
+      return;
+    }
     // create a copy of parts array of objects
     const newParts = [...parts];
     //loop through the new array, get to first blank field, and insert option there
     for (let i = 0; i < newParts.length; i++) {
       //if the option is blank and there is nothing selected for it,=>
       if (newParts[i].isBlank && !newParts[i].selected) {
-        console.log("This is option "+ option); //Unnecessary log method lol
+        console.log("This is option " + option); //Unnecessary log method lol
         newParts[i].selected = option;
         //Once the option is filled, break out of loop so it does not set the same option for both
         break;
@@ -41,6 +45,19 @@ const FillInTheBlank = ({ question, onCorrect, onWrong }) => {
     setParts(newParts);
   };
 
+  const isSelected = (option) => {
+    //For each part, check if it is has isBlank, and has a selected value , keep in filtered array
+    // If by the end of operation the filtered parts array has options, those options are
+    return (
+      parts.filter((part) => part.isBlank && part.selected === option).length >
+      0
+    );
+  };
+  const answerReady = () => {
+    return parts.filter(
+      (part) => part.isBlank && !part.selected).length > 0
+  };
+
   return (
     <>
       <Text style={styles.title}>Complete the sentence</Text>
@@ -54,14 +71,12 @@ const FillInTheBlank = ({ question, onCorrect, onWrong }) => {
                 {/* After an option is clicked, the function take the text value, */}
                 {part.selected && (
                   <WordOption
-                  //selected doesn't exist so text will be blank in the blank spot initially
+                    //selected doesn't exist so text will be blank in the blank spot initially
                     text={part.selected}
                     onPress={() => {
-                      console.log("Part is now "+part.selected);
                       removeSelectedAtIndex(index);
                     }}
                   />
-
                 )}
               </View>
             );
@@ -82,11 +97,12 @@ const FillInTheBlank = ({ question, onCorrect, onWrong }) => {
             onPress={() => {
               addOptionToSelected(option);
             }}
+            isSelected={isSelected(option)}
           />
         ))}
       </View>
 
-      <Button text="Check" disabled={false} onPress={onButtonPress} />
+      <Button text="Check" disabled={answerReady()} onPress={onButtonPress} />
     </>
   );
 };

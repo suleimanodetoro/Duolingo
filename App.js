@@ -84,7 +84,7 @@ const App = () => {
     //if retrieved data is not null, set the state variable
     if (lastQuestion) {
       // setCurrentQuestion(0)
-      setQuestionIndex(parseInt(lastQuestion));
+      // setQuestionIndex(parseInt(lastQuestion));
       
     }
     setHasLoaded(true); 

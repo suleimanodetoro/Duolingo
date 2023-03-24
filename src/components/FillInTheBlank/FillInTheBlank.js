@@ -9,14 +9,18 @@ const FillInTheBlank = ({ question, onCorrect, onWrong }) => {
   const [parts, setParts] = useState(question.parts); //keep track of all question parts that make up a sentence
 
   const onButtonPress = () => {
-    if (selected === question.correct) {
+    if (checkAnswer()) {
       onCorrect();
-      setSelected(null);
     } else {
       onWrong();
-      setSelected(null);
     }
   };
+const checkAnswer = () => {
+  return (
+    parts.filter((part) => part.isBlank && part.selected !== part.text)
+      .length === 0
+  );
+};
   //Adds option to blank by recreating parts state array, and inserting selected variable as text clicked so it is no longer undefined and the word option renders
   const addOptionToSelected = (option) => {
     //Do not add any options thay is already selected
@@ -29,7 +33,6 @@ const FillInTheBlank = ({ question, onCorrect, onWrong }) => {
     for (let i = 0; i < newParts.length; i++) {
       //if the option is blank and there is nothing selected for it,=>
       if (newParts[i].isBlank && !newParts[i].selected) {
-        console.log("This is option " + option); //Unnecessary log method lol
         newParts[i].selected = option;
         //Once the option is filled, break out of loop so it does not set the same option for both
         break;
